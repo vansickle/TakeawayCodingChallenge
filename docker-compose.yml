@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+  employee-service:
+    build: employee-service/.
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://employee-service-database:3306/employeesdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=temporarypass
+    depends_on:
+      - employee-service-database
+    ports:
+      - 8080:8080
+
+  employee-service-database:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=temporarypass
+      - MYSQL_DATABASE=employeesdb
+    volumes:
+      - employee-service-database-vol:/var/lib/mysql
+
+volumes:
+  employee-service-database-vol:
