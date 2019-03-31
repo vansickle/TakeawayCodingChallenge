@@ -11,6 +11,8 @@ services:
       - employee-service-database
     ports:
       - 8080:8080
+    volumes:
+      - ./employee-service/src:/service/src #dev version only, convenient for development cycle
 
   employee-service-database:
     image: mysql:5.7

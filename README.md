@@ -12,13 +12,23 @@ Coding Challenge for Takeaway.com. The goal is to implement two services: employ
 
 ### Installation
 
-All should via
+All should get up and run via
 
 ```
 docker-compose up
 ```
 
 ## Usage
+
+## Testing
+
+JDK 8 required on the host machine
+
+Within the service directory run:
+
+```
+./gradlew test -i 
+```
 
 ## Built With
 
