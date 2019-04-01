@@ -10,12 +10,14 @@ Coding Challenge for Takeaway.com. The goal is to implement two services: employ
 * docker
 * docker-compose
 
+4 GB of RAM is recommended
+
 ### Installation
 
 All should get up and run via
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 ## Usage
@@ -47,6 +49,12 @@ Within the service directory run:
 ```
 
 ## Built With
+
+* Spring
+* Spring Boot
+* RabbitMQ
+* MySQL
+* Apache Cassandra
 
 ## Architecture
 

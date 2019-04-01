@@ -48,7 +48,7 @@ public class EventServiceApplication {
 	}
 
 	@Bean
-	MessageListenerAdapter listenerAdapter(Receiver receiver) {
+	MessageListenerAdapter listenerAdapter(EventReceiver receiver) {
 		return new MessageListenerAdapter(receiver, "receiveMessage");
 	}
 

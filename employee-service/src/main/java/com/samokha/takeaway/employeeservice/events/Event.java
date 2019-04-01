@@ -2,7 +2,6 @@ package com.samokha.takeaway.employeeservice.events;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -14,7 +13,7 @@ public class Event{
 	/**
 	 * Aggregate root entity id
 	 */
-	private final UUID id;
+	private final UUID entityId;
 
 	/**
 	 * Event type
@@ -30,14 +29,14 @@ public class Event{
 	 */
 	private final String body;
 
-	public Event(UUID id, String eventType, String body) {
-		this.id = id;
+	public Event(UUID entityId, String eventType, String body) {
+		this.entityId = entityId;
 		this.eventType = eventType;
 		this.body = body;
 	}
 
-	public UUID getId() {
-		return id;
+	public UUID getEntityId() {
+		return entityId;
 	}
 
 	public String getEventType() {
