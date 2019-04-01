@@ -7,8 +7,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://employee-service-database:3306/employeesdb
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=temporarypass
+      - SPRING_RABBITMQ_HOST=rabbitmq
     depends_on:
       - employee-service-database
+      - rabbitmq
     ports:
       - 8080:8080
     volumes:
@@ -21,6 +23,24 @@ services:
       - MYSQL_DATABASE=employeesdb
     volumes:
       - employee-service-database-vol:/var/lib/mysql
+    ports:
+      - 3306:3306 #for development only
+
+  rabbitmq:
+    image: rabbitmq:3.7-management
+    ports:
+      - 15672:15672 #Management Port - default user:pass = guest:guest
+
+  event-service:
+    build: event-service/.
+    environment:
+    - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+    - rabbitmq
+    ports:
+    - 8081:8080
+    volumes:
+    - ./event-service/src:/service/src #dev version only, convenient for development cycle
 
 volumes:
   employee-service-database-vol:

@@ -17,6 +17,7 @@ public class Employee {
 	 */
 	@Id
 	@GeneratedValue
+	@org.hibernate.annotations.Type(type="uuid-char") //make uuid human-readable on DB level
 	private UUID id;
 
 	@Column(unique = true, length = 100, nullable = false)

@@ -2,8 +2,10 @@ package com.samokha.takeaway.employeeservice.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.samokha.takeaway.employeeservice.dal.EmployeeRepository;
 import com.samokha.takeaway.employeeservice.domain.Employee;
+import com.samokha.takeaway.employeeservice.events.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class EmployeeControllerIntegrationTest {
 
 	@Autowired
 	private EmployeeController controller;
+
+	@MockBean
+	private EventBus eventBus;
 
 	@Test
 	public void contexLoads() throws Exception {
@@ -68,5 +73,22 @@ public class EmployeeControllerIntegrationTest {
 		ResponseEntity<Employee> response2 = controller.createEmployee(employee2);
 	}
 
+	@Test()
+	public void givenSavedEmployee_whenUpdate_shouldSaveUpdateVersion() throws JsonMappingException {
+		Employee employee1 = new Employee();
+		employee1.setEmail("email-for-update@example.com");
+
+		ResponseEntity<Employee> response1 = controller.createEmployee(employee1);
+
+		Employee updatedEmployee = new Employee();
+		updatedEmployee.setEmail("updated-email@example.com");
+
+		ResponseEntity<Employee> employeeResponseEntity = controller.updateEmployee(response1.getBody().getId(), updatedEmployee);
+
+		assertThat(employeeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+		assertThat(employeeResponseEntity.getBody()).isNotNull();
+		assertThat(employeeResponseEntity.getBody().getEmail()).isEqualTo("updated-email@example.com");
+
+	}
 
 }
