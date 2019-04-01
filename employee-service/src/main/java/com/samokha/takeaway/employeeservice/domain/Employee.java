@@ -1,5 +1,7 @@
 package com.samokha.takeaway.employeeservice.domain;
 
+import io.swagger.annotations.ApiParam;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -18,6 +20,7 @@ public class Employee {
 	@Id
 	@GeneratedValue
 	@org.hibernate.annotations.Type(type="uuid-char") //make uuid human-readable on DB level
+	@ApiParam(readOnly = true)
 	private UUID id;
 
 	@Column(unique = true, length = 100, nullable = false)
@@ -25,6 +28,7 @@ public class Employee {
 	@Email
 	@NotNull
 	@NotEmpty
+	@ApiParam(required = true)
 	//TODO test email validation
 	private String email;
 

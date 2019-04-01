@@ -20,6 +20,22 @@ docker-compose up
 
 ## Usage
 
+### API
+
+Swagger API docs is available at
+
+#### Employee Service 
+
+<http://localhost:8080/api-docs>
+
+UI at <http://localhost:8080/swagger-ui.html>
+
+#### Event Service 
+
+<http://localhost:8081/api-docs>
+
+UI at <http://localhost:8081/swagger-ui.html>
+
 ## Testing
 
 JDK 8 required on the host machine
